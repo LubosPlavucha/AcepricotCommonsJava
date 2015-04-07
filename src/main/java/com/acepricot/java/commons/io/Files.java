@@ -1,4 +1,4 @@
-package com.lubosplavucha.commonutils.io;
+package com.acepricot.java.commons.io;
 
 import java.io.File;
 import java.io.IOException;

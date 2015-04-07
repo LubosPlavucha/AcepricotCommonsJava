@@ -3,14 +3,15 @@ apply plugin: 'eclipse'
 apply plugin: 'maven'
 apply plugin: 'maven-publish'
 
-group 'com.lubosplavucha.commonutils'
-version = '1.0'
+group = "com.acepricot.java.commons"
+artifact = "AcepricotCommonsJava"
+version = "1.0"
 sourceCompatibility = 1.7
 
 
 jar {
     manifest {
-        attributes 'Implementation-Title': 'LPCommonUtilsJava',
+        attributes 'Implementation-Title': artifact,
                    'Implementation-Version': version
     }
     from {
@@ -30,7 +31,7 @@ publishing {
     publications {
         maven(MavenPublication) {
             groupId group
-            artifactId 'LPCommonUtilsJava'
+            artifactId artifact
             version version
 
             from components.java

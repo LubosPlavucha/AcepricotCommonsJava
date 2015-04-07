@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.lubosplavucha.commonutils.io;
+package com.acepricot.java.commons.io;
 
 import java.io.InputStream;
 import java.util.Enumeration;

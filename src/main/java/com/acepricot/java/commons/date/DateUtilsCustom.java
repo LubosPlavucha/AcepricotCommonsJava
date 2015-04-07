@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.lubosplavucha.commonutils.date;
+package com.acepricot.java.commons.date;
 
 import java.util.Calendar;
 import java.util.Date;

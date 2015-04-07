@@ -1,4 +1,4 @@
-package com.lubosplavucha.commonutils.structures;
+package com.acepricot.java.commons.structures;
 
 import java.util.HashSet;
 import java.util.Set;

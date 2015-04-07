@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.lubosplavucha.commonutils.swing;
+package com.acepricot.java.commons.swing;
 
 import javax.swing.DefaultButtonModel;
 import javax.swing.JRadioButton;

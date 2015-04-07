@@ -1,4 +1,4 @@
-package com.lubosplavucha.commonutils.math;
+package com.acepricot.java.commons.math;
 
 import java.math.BigDecimal;
 
