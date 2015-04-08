@@ -2,20 +2,14 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'maven'
 apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.bintray'
 
-group = "com.acepricot.java.commons"
-artifact = "AcepricotCommonsJava"
-version = "1.0"
-sourceCompatibility = 1.7
-
-
-jar {
-    manifest {
-        attributes 'Implementation-Title': artifact,
-                   'Implementation-Version': version
+buildscript {
+    repositories {
+        jcenter()
     }
-    from {
-    	configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    dependencies {
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.0'
     }
 }
 
@@ -23,15 +17,35 @@ repositories {
     mavenCentral()
 }
 
+def projectName = "AcepricotCommonsJava"
+
+group = "com.acepricot.java.commons"
+version = "1.0"
+sourceCompatibility = 1.7
+
+
 dependencies {
     compile 'org.apache.commons:commons-lang3:3.1'
 }
+
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': projectName,
+                   'Implementation-Version': version
+    }
+    // includes dependencies into jar
+    from {
+    	configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
  
 publishing {
     publications {
-        maven(MavenPublication) {
+        mavenJava(MavenPublication) {
             groupId group
-            artifactId artifact
+            artifactId projectName
             version version
 
             from components.java
@@ -39,9 +53,29 @@ publishing {
     }
 }
 
-uploadArchives {
-    repositories.mavenDeployer {
-        repository(url: "file://" + projectDir + "/mvn-repo")
-        
+bintray {
+    user = "acepricot"
+    key = bintray_api_key	// bintray_api_key is program argument for launching gradle; get it from owner of the key
+
+    publications = ["mavenJava"]
+
+    dryRun = false //Whether to run this as dry-run, without deploying
+    publish = true //If version should be auto published after an upload
+    
+    pkg {
+        repo = 'maven'
+        name = projectName
+
+        vcsUrl = 'https://github.com/LubosPlavucha/AcepricotCommonsJava.git'
+        licenses = ['Apache-2.0']
+        labels = ['java', 'commons', 'utils']
+        publicDownloadNumbers = true
+
+        //Optional version descriptor
+        version {
+            name = project.version
+            vcsTag = project.version
+                       
+        }
     }
 }
